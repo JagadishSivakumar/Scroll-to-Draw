@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  height: 2000px;
+  background: grey;
+}
+
+#myid{
+  position: fixed;
+  top: 25%;
+  width: 300px;
+  height: 410px;
+  margin-left:20px;
+}
+h2{
+  color: white;
+}
+
+p{
+  color:white;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+
+<h2>Scroll down to draw a triangle</h2>
+<p>Scroll up to reverse it</p>
+
+<svg id="myid">
+  <path fill="none" stroke="white" stroke-width="5" id="triangle" d="M150 0 L75 200 L225 200 Z" />
+
+</svg>
+
+<script>
+//Initial Declarations
+var triangle = document.getElementById("triangle");
+var length = triangle.getTotalLength();
+
+// The start position
+triangle.style.strokeDasharray = length;
+
+//off-setting the dash
+triangle.style.strokeDashoffset = length;
+
+//scroll percentage
+window.addEventListener("scroll", myTriangle);
+
+function myTriangle() {
+var scrollpercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  var draw = length * scrollpercent;
+
+  // Reverse triangle
+  triangle.style.strokeDashoffset = length - draw;
+}
+</script>
+
+</body>
+</html>
